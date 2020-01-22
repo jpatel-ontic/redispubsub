@@ -34,11 +34,11 @@ public class RedisServiceImpl implements RedisService {
         redissonClient.getBucket(key).delete();
         return obj;
     }
+
     @Override
-    public RTopic getTopic(String topic){
+    public RTopic getTopic(String topic) {
         return redissonClient.getTopic(topic);
     }
-
 
 
     @Override

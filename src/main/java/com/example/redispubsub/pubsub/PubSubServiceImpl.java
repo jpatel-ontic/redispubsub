@@ -2,6 +2,7 @@ package com.example.redispubsub.pubsub;
 
 import com.example.redispubsub.services.RedisService;
 import org.redisson.api.RTopic;
+import org.redisson.api.listener.MessageListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,18 @@ public class PubSubServiceImpl implements PubSubService {
 
     }
 
+
     @Override
-    public <T> T getTopic(String topic) {
-        RTopic rTopic = redisService.getTopic(topic);
-        return (T) rTopic;
+    public <T> void subscribe(String name, final PubSubListener listener) {
+        System.out.println(listener.getClass());
+        RTopic topic = redisService.getTopic(name);
+        int regId = topic.addListener(Object.class, new MessageListener<Object>() {
+            @Override
+            public void onMessage(CharSequence channel, Object msg) {
+                listener.onMessage(msg);
+
+            }
+        });
     }
 
 }

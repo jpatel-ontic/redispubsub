@@ -13,10 +13,8 @@ public interface RedisService {
 
     <T> T delete(String key);
 
-    // void listen(String topic) throws InterruptedException;
-
-    // <T> void publish(String topic, T message);
 
     <T> Map<String, T> getAll();
+
     RTopic getTopic(String topic);
 }
