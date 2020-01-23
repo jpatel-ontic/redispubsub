@@ -33,7 +33,8 @@ public class VM1 implements PubSubListener {
     }
 
     public void listen(String topic) {
-        this.pubSubService.subscribe(topic, this);
+        System.out.println("subcribed to "+topic);
+        this.pubSubService.subscribe(topic,     this);
     }
 
 
